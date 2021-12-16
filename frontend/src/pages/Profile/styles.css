@@ -84,3 +84,31 @@
     line-height: 21px;
     font-size: 16px;
 }
+
+.title-profile-page {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.client-search {
+    all: unset;
+    box-sizing: border-box;
+
+    padding: 10px 14px;
+    width: 300px;
+    margin-top: 50px;
+
+    text-align: start; 
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+
+    box-shadow: 7px 7px 5px #9191910d;
+    background-color: #ffffff;
+    background-image: url("../../assets/icon_lupa.png");
+    background-size: 24px;
+    background-repeat: no-repeat;
+    background-position-x: 97%;
+    background-position-y: center;
+}
+

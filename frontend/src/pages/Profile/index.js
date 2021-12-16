@@ -17,14 +17,18 @@ export default function Profile() {
     const ongName = localStorage.getItem('ongName');
 
     useEffect(() => {
-        api.get('profile', {
-           headers: {
-               Authorization: ongId,
-           } 
-        }).then(response => {
-            setIncidents(response.data);
-        })
+        handleLoadIncidents();
     }, [ongId]);
+
+    function handleLoadIncidents() {
+        api.get('profile', {
+            headers: {
+                Authorization: ongId,
+            } 
+            }).then(response => {
+            setIncidents(response.data);
+        });
+    }
 
     async function handleDeleteIncident(id) {
         try {
@@ -46,6 +50,18 @@ export default function Profile() {
         history.push('/');
     }
 
+    function handleChangeInput(event) {
+        const inputSearchIncident = event.target.value;
+
+        if (!inputSearchIncident) {
+            handleLoadIncidents();
+            return;
+        }
+
+        const filterIncident = incidents.filter(item => (item.title).toLowerCase().includes(inputSearchIncident.toLowerCase()));
+        setIncidents(filterIncident);
+    }
+
     return(
         <div className="profile-container">
             <header>
@@ -58,7 +74,14 @@ export default function Profile() {
                 </button>
             </header>
 
-            <h1>Casos cadastrados</h1>
+            <div className="title-profile-page">
+                <h1>Casos cadastrados</h1>
+                <input 
+                    className='client-search'
+                    placeholder='Pesquisa'
+                    onChange={(event) => handleChangeInput(event)}
+                />
+            </div>
 
             <ul>
                 {incidents.map(incident => (
